@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Lamma - Our Mission & Vision</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #d35400;
+      --secondary: #8e44ad;
+      --accent: #f39c12;
+      --light: #f9f9f9;
+      --dark: #34495e;
+      --success: #27ae60;
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --border-radius: 12px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: var(--font-main);
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: #fcfcfc;
+      overflow-x: hidden;
+    }
+    /* Language Switcher */
+    .language-switcher {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 5px 10px;
+      box-shadow: var(--shadow);
+    }
+    .language-switcher button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 5px 8px;
+      border-radius: 15px;
+      transition: background-color 0.3s;
+    }
+    .language-switcher button.active {
+      background-color: var(--primary);
+      color: white;
+    }
+    /* Navigation */
+    header {
+      background-color: #fff;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 60px;
+      width: auto;
+      margin-right: 10px;
+    }
+    .logo h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .nav-links a:hover:after,
+    .nav-links a.active:after {
+      width: 100%;
+    }
+    .mobile-nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--dark);
+    }
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(rgba(52, 73, 94, 0.8), rgba(52, 73, 94, 0.8)), url("/api/placeholder/1920/400");
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .page-header h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    .page-header p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    /* Mission Section */
+    .mission-section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .mission-content {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+    .mission-image {
+      flex: 1;
+      max-width: 500px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .mission-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .mission-text {
+      flex: 1;
+    }
+    .mission-text h2 {
+      font-size: 2.5rem;
+      margin-bottom: 25px;
+      color: var(--dark);
+      position: relative;
+      padding-bottom: 15px;
+    }
+    .mission-text h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background-color: var(--primary);
+    }
+    .mission-text p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      color: #555;
+    }
+    .mission-values {
+      margin-top: 30px;
+    }
+    .value-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .value-icon {
+      background-color: rgba(211, 84, 0, 0.1);
+      color: var(--primary);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 20px;
+      flex-shrink: 0;
+    }
+    .value-icon i {
+      font-size: 1.5rem;
+    }
+    .value-text h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+    /* Problem Statement */
+    .problem-section {
+      background-color: #f5f7fa;
+      padding: 80px 20px;
+    }
+    .problem-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .section-header h2 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 15px;
+    }
+    .section-header p {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .problem-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    .stat-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      padding: 30px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+    }
+    .stat-card:hover {
+      transform: translateY(-10px);
+    }
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .stat-label {
+      font-size: 1.1rem;
+      color: var(--dark);
+    }
+    .problem-solution {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+    .solution-image {
+      flex: 1;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .solution-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .solution-text {
+      flex: 1;
+    }
+    .solution-text h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--dark);
+      position: relative;
+      padding-bottom: 15px;
+    }
+    .solution-text h3:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: var(--primary);
+    }
+    .solution-text p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      color: #555;
+    }
+    .solution-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .solution-feature {
+      display: flex;
+      align-items: flex-start;
+    }
+    .solution-feature i {
+      color: var(--success);
+      margin-right: 10px;
+      font-size: 1.2rem;
+      margin-top: 3px;
+    }
+    /* Team Section */
+    .team-section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: 10px repeat(3, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+      justify-content: center;
+    }
+    .invisible-card {
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .team-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+      align-items: center;
+    }
+    .team-card:hover {
+      transform: translateY(-10px);
+    }
+    .team-image {
+      width: 100%;
+      overflow: hidden;
+    }
+    .team-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .team-card:hover .team-image img {
+      transform: scale(1.1);
+    }
+    .team-info {
+      padding: 20px;
+      text-align: center;
+    }
+    .team-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+      color: var(--dark);
+    }
+    .team-info span {
+      color: var(--primary);
+      font-size: 1rem;
+      display: block;
+      margin-bottom: 15px;
+    }
+    .team-info p {
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+    .team-social {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .team-social a {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: #f5f7fa;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    .team-social a:hover {
+      background-color: var(--primary);
+      color: white;
+    }
+    .team-card:first-child {
+      transform: translateX(20px);
+      align-items: center;
+    }
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .cta-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .cta-section p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      height: 60px;
+    }
+    #downloadAppBtn {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    #downloadAppBtn:hover {
+      transform: translateY(-3px);
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      height: 58px;
+      width: 185px;
+    }
+    .btn-light {
+      background-color: white;
+      color: var(--primary);
+    }
+    .btn-light:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-3px);
+      box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
+    }
+    .btn-outline-light {
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+    .btn-outline-light:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px);
+      box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
+    }
+    /* Footer */
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 60px 20px 30px;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .footer-logo img {
+      height: 40px;
+      margin-right: 10px;
+      filter: brightness(0) invert(1);
+    }
+    .footer-logo h2 {
+      font-size: 1.8rem;
+      color: white;
+    }
+    .footer-about p {
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+    .footer-links h3,
+    .footer-contact h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .footer-links h3::after,
+    .footer-contact h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: var(--primary);
+    }
+    .footer-links ul {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+    }
+    .footer-links a i {
+      margin-right: 10px;
+      font-size: 0.8rem;
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    .contact-info {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+    }
+    .contact-info i {
+      margin-right: 15px;
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-top: 5px;
+    }
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .social-link:hover {
+      background-color: var(--primary);
+      transform: translateY(-3px);
+    }
+    .copyright {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 30px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    .modal-content {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      animation: popup 0.5s ease-out;
+    }
+    .modal-content .icon i {
+      font-size: 50px;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    .modal-content h1 {
+      color: var(--primary);
+      font-size: 24px;
+      margin-bottom: 20px;
+      font-weight: normal;
+    }
+    .modal-content p {
+      color: #555;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    .modal-content a {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .modal-content a:hover {
+      background-color: #c04300;
+    }
+    /* Fade-out Animation for Modal */
+    .fade-out {
+      animation: fadeOut 0.5s ease-out forwards;
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+    @keyframes popup {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+    /* ---------- Additional CSS for Dropdown Navigation and Stylish Icons ---------- */
+    .navbar {
+      position: relative;
+    }
+    /* Override nav-links to use dropdown style on all devices */
+    .nav-links {
+      display: block !important;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.5s ease;
+      box-shadow: var(--shadow);
+      z-index: 99;
+      padding: 0;
+      margin: 0;
+    }
+    .nav-links.active {
+      max-height: 300px;
+    }
+    .nav-links li {
+      border-bottom: 1px solid #f0f0f0;
+      list-style: none;
+    }
+    .nav-links li a {
+      display: block;
+      padding: 15px 20px;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-links li a:hover {
+      background-color: #f5f5f5;
+    }
+    /* Modern stylish icons using Font Awesome */
+    .nav-links li a::before {
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      margin-right: 10px;
+    }
+    .nav-links li:nth-child(1) a::before {
+      content: "\f015";
+    }
+    .nav-links li:nth-child(2) a::before {
+      content: "\f05a";
+    }
+    .nav-links li:nth-child(3) a::before {
+      content: "\f085";
+    }
+    .nav-links li:nth-child(4) a::before {
+      content: "\f144";
+    }
+    .nav-links li:nth-child(5) a::before {
+      content: "\f0e0";
+    }
+    .nav-links li:nth-child(6) a::before {
+      content: "\f023";
+    }
+    /* Force mobile nav toggle to display always */
+    .mobile-nav-toggle {
+      display: block !important;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--dark);
+    }
+    /* ---------- End Additional CSS ---------- */
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="/LammaLogo.png" alt="Lamma Logo">
+        <h1>Lamma</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="#" class="active">About</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="how_it_works.html">How It Works</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="security.html">Security & Privacy</a></li>
+      </ul>
+      <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <section class="page-header">
+    <h1>About Lamma</h1>
+    <p>Our mission is to strengthen family bonds in Palestinian society through meaningful technology use.</p>
+  </section>
+
+  <section class="mission-section">
+    <div class="mission-content">
+      <div class="mission-image">
+        <img src="/NoBond.webp" alt="Palestinian Family Together">
+      </div>
+      <div class="mission-text">
+        <h2>Our Mission & Vision</h2>
+        <p>At Lamma, we believe that technology should bring families closer, not drive them apart. Our mission is to transform screen time into quality family time through culturally relevant activities that strengthen bonds within Palestinian households.</p>
+        <p>Our vision is a society where technology enhances family connections, preserves cultural values, and creates lasting memories across generations.</p>
+        <div class="mission-values">
+          <div class="value-item">
+            <div class="value-icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <div class="value-text">
+              <h3>Family First</h3>
+              <p>We design every feature with the goal of strengthening family relationships and creating meaningful interactions.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">
+              <i class="fas fa-landmark"></i>
+            </div>
+            <div class="value-text">
+              <h3>Cultural Preservation</h3>
+              <p>We integrate Palestinian traditions, stories, and values into our activities to connect younger generations with their heritage.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="value-text">
+              <h3>Safe & Trusted</h3>
+              <p>We prioritize creating a secure digital environment where families can share experiences without privacy concerns.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="problem-section">
+    <div class="problem-container">
+      <div class="section-header">
+        <h2>The Challenge We're Addressing</h2>
+        <p>Technology addiction is weakening family bonds in our community, creating disconnection where there should be togetherness.</p>
+      </div>
+      <div class="problem-stats">
+        <div class="stat-card">
+          <div class="stat-number">68%</div>
+          <div class="stat-label">Of Palestinian families report decreased quality time due to technology use</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">4.5hrs</div>
+          <div class="stat-label">Average daily screen time for Palestinian teenagers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">73%</div>
+          <div class="stat-label">Of parents worry about technology affecting cultural connection</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">62%</div>
+          <div class="stat-label">Of family meals interrupted by device notifications</div>
+        </div>
+      </div>
+      <div class="problem-solution">
+        <div class="solution-text">
+          <h3>Our Solution: Meaningful Connection Through Technology</h3>
+          <p>Rather than fighting against technology, Lamma transforms it into a tool for connection. We've created a platform that encourages families to engage with each other through culturally relevant activities, games, and challenges.</p>
+          <p>By providing structured digital experiences that require family participation, we're helping Palestinian families reclaim technology as a means of strengthening relationships rather than weakening them.</p>
+          <div class="solution-features">
+            <div class="solution-feature">
+              <i class="fas fa-check-circle"></i>
+              <p>Engaging activities that require collaboration</p>
+            </div>
+            <div class="solution-feature">
+              <i class="fas fa-check-circle"></i>
+              <p>Cultural content that preserves Palestinian heritage</p>
+            </div>
+            <div class="solution-feature">
+              <i class="fas fa-check-circle"></i>
+              <p>Wellness challenges that promote healthy habits</p>
+            </div>
+            <div class="solution-feature">
+              <i class="fas fa-check-circle"></i>
+              <p>Memory creation and preservation tools</p>
+            </div>
+            <div class="solution-feature">
+              <i class="fas fa-check-circle"></i>
+              <p>Time management features to establish boundaries</p>
+            </div>
+            <div class="solution-feature">
+              <i class="fas fa-check-circle"></i>
+              <p>Reward systems that encourage continued use</p>
+            </div>
+          </div>
+        </div>
+        <div class="solution-image">
+          <img src="/FamilyPlane.jpg" alt="Family Using Lamma App Together">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <div class="section-header">
+      <h2>Meet Our Team</h2>
+      <p>A passionate group of technologists, educators, and cultural preservationists working together to strengthen Palestinian family bonds.</p>
+    </div>
+    <div class="team-grid">
+      <!-- Invisible card for spacing -->
+      <div class="team-card invisible-card"></div>
+      <div class="team-card">
+        <div class="team-image">
+          <img src="/full-stack.png" alt="Team Member">
+        </div>
+        <div class="team-info">
+          <h3>Ali Izzeldin</h3>
+          <span>Full-Stack Dev</span>
+          <p>A versatile full-stack developer proficient in both front-end and back-end technologies, dedicated to building robust applications that bridge cultural divides and empower families.</p>
+          <div class="team-social">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-image">
+          <img src="/FrontDev1.jpeg" alt="Team Member">
+        </div>
+        <div class="team-info">
+          <h3>Baraa Salama</h3>
+          <span>Website HTML, CSS, JS Designer</span>
+          <p>An experienced web designer specializing in HTML, CSS, and JavaScript, crafting visually engaging and responsive websites that showcase Palestinian culture and innovation.</p>
+          <div class="team-social">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-image">
+          <img src="FlutterDev.jpg" alt="Team Member">
+        </div>
+        <div class="team-info">
+          <h3>Ibrahim Barahma</h3>
+          <span>Flutter Designer</span>
+          <p>A skilled Flutter designer with a flair for creating seamless cross-platform mobile experiences, merging modern design principles with a deep respect for Palestinian traditions.</p>
+          <div class="team-social">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="cta-container">
+      <h2>Join Our Family Movement</h2>
+      <p>Download Lamma today and start strengthening your family bonds through meaningful activities and shared experiences.</p>
+      <div class="cta-buttons">
+        <a href="#" id="downloadAppBtn">
+          <img src="/Googleplay.png" alt="Get it on Google Play" style="height: 70px; width: auto;">
+        </a>
+        <a href="contact.html" class="btn btn-outline-light" style="position: relative; top: 4px;">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Message for "App Under Development" with hand-stop icon -->
+  <div id="appModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="icon">
+        <i class="fas fa-hand-paper"></i>
+      </div>
+      <h1>App Under Development</h1>
+      <p>Our app is currently under development. Please check back later for updates.</p>
+      <a href="#" id="closeModal">Continue</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="/LammaLogo.png" alt="Lamma Logo">
+          <h2>Lamma</h2>
+        </div>
+        <p>Bringing Palestinian families together through meaningful interactions and culturally relevant activities.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="features.html"><i class="fas fa-chevron-right"></i> Features</a></li>
+          <li><a href="how_it_works.html"><i class="fas fa-chevron-right"></i> How It Works</a></li>
+          <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a></li>
+          <li><a href="faq.html"><i class="fas fa-chevron-right"></i> FAQs</a></li>
+          <li><a href="security.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <div class="contact-info">
+          <i class="fas fa-phone"></i>
+          <p>+972 595114517</p>
+        </div>
+        <div class="contact-info">
+          <i class="fas fa-envelope"></i>
+          <p>seniorlamma@gmail.com</p>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://x.com/LammaFamilyApp" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/lamma_app/" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@LammaApp" class="social-link"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 Lamma. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Show the modal with a fade-in pop-up animation when the Download App button is clicked.
+    document.getElementById('downloadAppBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      var modalContent = document.querySelector('.modal-content');
+      // Reset animation so it plays on each trigger
+      modalContent.style.animation = 'none';
+      // Force reflow to restart the animation
+      void modalContent.offsetWidth;
+      modalContent.style.animation = 'popup 0.5s ease-out';
+      document.getElementById('appModal').style.display = 'flex';
+    });
+    // Fade out the modal on clicking Continue
+    document.getElementById('closeModal').addEventListener('click', function(e) {
+      e.preventDefault();
+      var appModal = document.getElementById('appModal');
+      appModal.classList.add('fade-out');
+      appModal.addEventListener('animationend', function() {
+        appModal.style.display = 'none';
+        appModal.classList.remove('fade-out');
+      }, { once: true });
+    });
+  </script>
+  <script>
+    // Toggle dropdown navigation on click of the mobile-nav-toggle button
+    document.addEventListener("DOMContentLoaded", function() {
+      var toggleButton = document.querySelector(".mobile-nav-toggle");
+      var navLinks = document.querySelector(".nav-links");
+      toggleButton.addEventListener("click", function(e) {
+        e.preventDefault();
+        navLinks.classList.toggle("active");
+      });
+    });
+  </script>
+</body>
+</html>

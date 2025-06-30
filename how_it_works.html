@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lamma - How It Works & Guide</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #d35400;
+      --secondary: #8e44ad;
+      --accent: #f39c12;
+      --light: #f9f9f9;
+      --dark: #34495e;
+      --success: #27ae60;
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --border-radius: 12px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: var(--font-main);
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: #fcfcfc;
+      overflow-x: hidden;
+    }
+    /* Language Switcher (if used) */
+    .language-switcher {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 5px 10px;
+      box-shadow: var(--shadow);
+    }
+    .language-switcher button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 5px 8px;
+      border-radius: 15px;
+      transition: background-color 0.3s;
+    }
+    .language-switcher button.active {
+      background-color: var(--primary);
+      color: white;
+    }
+    /* Navigation (Header) */
+    header {
+      background-color: #fff;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      position: relative;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 60px;
+      width: auto;
+      margin-right: 10px;
+    }
+    .logo h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .nav-links a:hover:after {
+      width: 100%;
+    }
+    .mobile-nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--dark);
+    }
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 80vh;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4ecfb 100%);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 0 20px;
+    }
+    .hero .pattern-dots {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(var(--accent) 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 0.3;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      z-index: 2;
+    }
+    .hero-text {
+      flex: 1;
+      max-width: 550px;
+    }
+    .hero-text h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+    .hero-text p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #555;
+    }
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      position: relative;
+      height: 650px;
+    }
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+      filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.1));
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    /* Timeline Section */
+    .timeline {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 20px;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: var(--primary);
+      transform: translateX(-50%);
+    }
+    .timeline-item {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+    }
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+    .timeline-item:nth-child(even) {
+      left: 50%;
+      text-align: left;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 4px solid var(--light);
+      z-index: 1;
+    }
+    .timeline-item:nth-child(odd)::before {
+      right: -10px;
+    }
+    .timeline-item:nth-child(even)::before {
+      left: -10px;
+    }
+    .timeline-item h4 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .timeline-item p {
+      font-size: 1rem;
+      color: #555;
+    }
+    /* Guide Section */
+    .guide-section {
+      background: var(--light);
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .guide-section h3 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+    .guide-section p {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 800px;
+      margin: auto;
+    }
+    /* Footer */
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 60px 20px 30px;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .footer-logo img {
+      height: 40px;
+      margin-right: 10px;
+      filter: brightness(0) invert(1);
+    }
+    .footer-logo h2 {
+      font-size: 1.8rem;
+      color: white;
+    }
+    .footer-about p {
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+    .footer-links h3,
+    .footer-contact h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .footer-links h3::after,
+    .footer-contact h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: var(--primary);
+    }
+    .footer-links ul {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+    }
+    .footer-links a i {
+      margin-right: 10px;
+      font-size: 0.8rem;
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    .contact-info {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+    }
+    .contact-info i {
+      margin-right: 15px;
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-top: 5px;
+    }
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.1);
+      color: white;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .social-link:hover {
+      background-color: var(--primary);
+      transform: translateY(-3px);
+    }
+    .copyright {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 30px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .hero-text h2 {
+        font-size: 2.5rem;
+      }
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 50px;
+      }
+      .hero-text {
+        margin-bottom: 50px;
+      }
+      .hero {
+        height: auto;
+        padding: 50px 0;
+      }
+    }
+    @media (max-width: 768px) {
+      .mobile-nav-toggle {
+        display: block;
+      }
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -300px;
+        background-color: white;
+        width: 300px;
+        height: 100vh;
+        flex-direction: column;
+        padding: 40px 20px;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 99;
+      }
+      .nav-links.active {
+        right: 0;
+      }
+      .hero-text h2 {
+        font-size: 2rem;
+      }
+      .timeline {
+        padding: 20px 10px;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero-text h2 {
+        font-size: 1.8rem;
+      }
+    }
+    /* RTL Support for Arabic */
+    html[dir="rtl"] .nav-links a:after {
+      left: auto;
+      right: 0;
+    }
+    html[dir="rtl"] .timeline-item::before {
+      left: auto;
+      right: -10px;
+    }
+    html[dir="rtl"] .footer-links h3::after,
+    html[dir="rtl"] .footer-contact h3::after {
+      left: auto;
+      right: 0;
+    }
+    /* ---------- Additional CSS for Dropdown Navigation and Stylish Icons ---------- */
+    .navbar {
+      position: relative;
+    }
+    /* Override .nav-links to use dropdown style on all devices */
+    .nav-links {
+      display: block !important;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.5s ease;
+      box-shadow: var(--shadow);
+      z-index: 99;
+      padding: 0;
+      margin: 0;
+    }
+    .nav-links.active {
+      max-height: 300px;
+    }
+    .nav-links li {
+      border-bottom: 1px solid #f0f0f0;
+      list-style: none;
+    }
+    .nav-links li a {
+      display: block;
+      padding: 15px 20px;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-links li a:hover {
+      background-color: #f5f5f5;
+    }
+    /* Modern stylish icons using Font Awesome */
+    .nav-links li a::before {
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      margin-right: 10px;
+    }
+    .nav-links li:nth-child(1) a::before {
+      content: "\f015"; /* Home icon */
+    }
+    .nav-links li:nth-child(2) a::before {
+      content: "\f05a"; /* About icon */
+    }
+    .nav-links li:nth-child(3) a::before {
+      content: "\f085"; /* Features icon */
+    }
+    .nav-links li:nth-child(4) a::before {
+      content: "\f144"; /* How It Works icon */
+    }
+    .nav-links li:nth-child(5) a::before {
+      content: "\f0e0"; /* Contact icon */
+    }
+    .nav-links li:nth-child(6) a::before {
+      content: "\f023"; /* Security icon */
+    }
+    /* Always display the mobile nav toggle */
+    .mobile-nav-toggle {
+      display: block !important;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--dark);
+    }
+    /* ---------- End Additional CSS ---------- */
+  </style>
+</head>
+<body>
+  <!-- Header (Same as home.html) -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="/LammaLogo.png" alt="Lamma Logo">
+        <h1>Lamma</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="how_it_works.html" class="active">How It Works</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="security.html">Security & Privacy</a></li>
+      </ul>
+      <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Hero Section for How It Works -->
+  <section class="hero">
+    <div class="pattern-dots"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <h2>How Lamma Works & Guide</h2>
+        <p>Discover our innovative approach to family bonding through interactive activities and challenges. Although the Lamma app is still in development, this guide outlines our vision for connecting families in a secure and engaging way.</p>
+      </div>
+      <div class="hero-image">
+        <img src="/Profile.png" alt="Lamma How It Works">
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="timeline">
+    <div class="timeline-item">
+      <h4>Step 1: Sign Up & Create Your Family</h4>
+      <p>Register your account and set up your family profile. Begin by inviting all family members to join the platform.</p>
+    </div>
+    <div class="timeline-item">
+      <h4>Step 2: Customize Your Profiles</h4>
+      <p>Personalize each family member's profile with unique details, photos, and preferences for a tailored experience.</p>
+    </div>
+    <div class="timeline-item">
+      <h4>Step 3: Engage in Fun Challenges</h4>
+      <p>Participate in interactive challenges and gamified tasks designed to promote teamwork and strengthen bonds.</p>
+    </div>
+    <div class="timeline-item">
+      <h4>Step 4: Explore the Family Tree</h4>
+      <p>Build a digital family tree to visualize relationships, celebrate heritage, and preserve memories for future generations.</p>
+    </div>
+    <div class="timeline-item">
+      <h4>Step 5: Share & Cherish Memories</h4>
+      <p>Upload photos, videos, and voice notes to the secure memory vault, keeping your family’s cherished moments safe and accessible.</p>
+    </div>
+    <div class="timeline-item">
+      <h4>Step 6: Daily Interactions</h4>
+      <p>Enjoy daily prompts, polls, and surprise timers that spark conversation and encourage quality time together.</p>
+    </div>
+  </section>
+
+  <!-- Guide Section -->
+  <section class="guide-section">
+    <h3>Your Guide to a Connected Family</h3>
+    <p>While the Lamma app is still in development, our vision is to create an engaging and secure platform that transforms how families connect. Stay tuned for updates and join us on this exciting journey toward stronger family bonds.</p>
+  </section>
+
+  <!-- Footer (Same as home.html) -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="/LammaLogo.png" alt="Lamma Logo">
+          <h2>Lamma</h2>
+        </div>
+        <p>Bringing Palestinian families together through meaningful interactions and culturally relevant activities.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="features.html"><i class="fas fa-chevron-right"></i> Features</a></li>
+          <li><a href="how_it_works.html"><i class="fas fa-chevron-right"></i> How It Works</a></li>
+          <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a></li>
+          <li><a href="faq.html"><i class="fas fa-chevron-right"></i> FAQs</a></li>
+          <li><a href="security.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <div class="contact-info">
+          <i class="fas fa-phone"></i>
+          <p>+972 595114517</p>
+        </div>
+        <div class="contact-info">
+          <i class="fas fa-envelope"></i>
+          <p>seniorlamma@gmail.com</p>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://x.com/LammaFamilyApp" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/lamma_app/" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@LammaApp" class="social-link"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 Lamma. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Toggle dropdown navigation on click of the mobile-nav-toggle button
+    document.addEventListener("DOMContentLoaded", function() {
+      var toggleButton = document.querySelector(".mobile-nav-toggle");
+      var navLinks = document.querySelector(".nav-links");
+      toggleButton.addEventListener("click", function(e) {
+        e.preventDefault();
+        navLinks.classList.toggle("active");
+      });
+    });
+  </script>
+</body>
+</html>

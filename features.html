@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lamma - Features</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #d35400;
+      --secondary: #8e44ad;
+      --accent: #f39c12;
+      --light: #f9f9f9;
+      --dark: #34495e;
+      --success: #27ae60;
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --border-radius: 12px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: var(--font-main);
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: #fcfcfc;
+      overflow-x: hidden;
+    }
+    /* Language Switcher */
+    .language-switcher {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      z-index: 1000;
+      background: rgba(255,255,255,0.8);
+      border-radius: 20px;
+      padding: 5px 10px;
+      box-shadow: var(--shadow);
+    }
+    .language-switcher button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 5px 8px;
+      border-radius: 15px;
+      transition: background-color 0.3s;
+    }
+    .language-switcher button.active {
+      background-color: var(--primary);
+      color: white;
+    }
+    /* Navigation */
+    header {
+      background-color: #fff;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      position: relative;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 60px;
+      width: auto;
+      margin-right: 10px;
+    }
+    .logo h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .nav-links a:hover:after {
+      width: 100%;
+    }
+    .nav-links a.active:after {
+      width: 100%;
+    }
+    .mobile-nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--dark);
+    }
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 60vh;
+      background: linear-gradient(135deg, #e4ecfb 0%, #f5f7fa 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #555;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    /* Features Section */
+    .features-section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .features-section .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .features-section .section-header h3 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 15px;
+    }
+    .features-section .section-header p {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .feature-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .feature-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+    .feature-card:hover::before {
+      width: 10px;
+    }
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: rgba(211,84,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+    .feature-icon i {
+      font-size: 2rem;
+      color: var(--primary);
+    }
+    .feature-card h4 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+    .feature-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+    /* Footer */
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 60px 20px 30px;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .footer-logo img {
+      height: 40px;
+      margin-right: 10px;
+      filter: brightness(0) invert(1);
+    }
+    .footer-logo h2 {
+      font-size: 1.8rem;
+      color: white;
+    }
+    .footer-about p {
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+    .footer-links h3,
+    .footer-contact h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .footer-links h3::after,
+    .footer-contact h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: var(--primary);
+    }
+    .footer-links ul {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+    }
+    .footer-links a i {
+      margin-right: 10px;
+      font-size: 0.8rem;
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    .contact-info {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+    }
+    .contact-info i {
+      margin-right: 15px;
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-top: 5px;
+    }
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.1);
+      color: white;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .social-link:hover {
+      background-color: var(--primary);
+      transform: translateY(-3px);
+    }
+    .copyright {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 30px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    /* ---------- Additional CSS for Dropdown Navigation and Stylish Icons ---------- */
+    /* Force the navbar to be positioned relative */
+    .navbar {
+      position: relative;
+    }
+    /* Override .nav-links to use dropdown style on all devices */
+    .nav-links {
+      display: block !important;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.5s ease;
+      box-shadow: var(--shadow);
+      z-index: 99;
+      padding: 0;
+      margin: 0;
+    }
+    .nav-links.active {
+      max-height: 300px;
+    }
+    .nav-links li {
+      border-bottom: 1px solid #f0f0f0;
+      list-style: none;
+    }
+    .nav-links li a {
+      display: block;
+      padding: 15px 20px;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .nav-links li a:hover {
+      background-color: #f5f5f5;
+    }
+    /* Modern stylish icons using Font Awesome */
+    .nav-links li a::before {
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      margin-right: 10px;
+    }
+    .nav-links li:nth-child(1) a::before {
+      content: "\f015"; /* Home icon */
+    }
+    .nav-links li:nth-child(2) a::before {
+      content: "\f05a"; /* About icon */
+    }
+    .nav-links li:nth-child(3) a::before {
+      content: "\f085"; /* Features icon */
+    }
+    .nav-links li:nth-child(4) a::before {
+      content: "\f144"; /* How It Works icon */
+    }
+    .nav-links li:nth-child(5) a::before {
+      content: "\f0e0"; /* Contact icon */
+    }
+    .nav-links li:nth-child(6) a::before {
+      content: "\f023"; /* Security icon */
+    }
+    /* Always display the mobile nav toggle */
+    .mobile-nav-toggle {
+      display: block !important;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--dark);
+    }
+    /* ---------- End Additional CSS ---------- */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -300px;
+        background-color: white;
+        width: 300px;
+        height: 100vh;
+        flex-direction: column;
+        padding: 40px 20px;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 99;
+      }
+      .nav-links.active {
+        right: 0;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .feature-card h4 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="/LammaLogo.png" alt="Lamma Logo" />
+        <h1>Lamma</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="features.html" class="active">Features</a></li>
+        <li><a href="how_it_works.html">How It Works</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="security.html">Security & Privacy</a></li>
+      </ul>
+      <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Discover Lamma's Features</h2>
+      <p>Explore innovative tools designed to strengthen family bonds, promote cultural engagement, and enhance wellness for Palestinian families.</p>
+    </div>
+  </section>
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="section-header">
+      <h3>Key Features</h3>
+      <p>Our app is packed with dynamic features that turn everyday interactions into opportunities for fun, learning, and togetherness.</p>
+    </div>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h4>Family Challenges</h4>
+        <p>Engage in weekly challenges that foster teamwork, communication, and quality time among family members.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-puzzle-piece"></i>
+        </div>
+        <h4>Interactive Games</h4>
+        <p>Enjoy culturally relevant puzzles, riddles, and quizzes that entertain while educating about heritage.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-heart"></i>
+        </div>
+        <h4>Memory Vault</h4>
+        <p>Securely store and share cherished family photos, videos, and voice notes to preserve your legacy.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-sync-alt"></i>
+        </div>
+        <h4>Wheel of Chores</h4>
+        <p>Turn everyday chores into a fun game with our randomized spinner that assigns tasks in an engaging way.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-question-circle"></i>
+        </div>
+        <h4>Daily Questions</h4>
+        <p>Prompt thoughtful conversations with daily or weekly questions that spark reflection and connection.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-heartbeat"></i>
+        </div>
+        <h4>Wellness Challenges</h4>
+        <p>Participate in fitness and mindfulness activities that encourage a healthy lifestyle together.</p>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="/LammaLogo.png" alt="Lamma Logo" />
+          <h2>Lamma</h2>
+        </div>
+        <p>Bringing Palestinian families together through meaningful interactions and culturally relevant activities.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="features.html"><i class="fas fa-chevron-right"></i> Features</a></li>
+          <li><a href="how-it-works.html"><i class="fas fa-chevron-right"></i> How It Works</a></li>
+          <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a></li>
+          <li><a href="faq.html"><i class="fas fa-chevron-right"></i> FAQs</a></li>
+          <li><a href="security.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <div class="contact-info">
+          <i class="fas fa-phone"></i>
+          <p>+972 595114517</p>
+        </div>
+        <div class="contact-info">
+          <i class="fas fa-envelope"></i>
+          <p>seniorlamma@gmail.com</p>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://x.com/LammaFamilyApp" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/lamma_app/" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@LammaApp" class="social-link"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 Lamma. All rights reserved.</p>
+  </footer>
+  <script>
+    // Toggle dropdown navigation on click of the mobile-nav-toggle button
+    document.addEventListener("DOMContentLoaded", function() {
+      var toggleButton = document.querySelector(".mobile-nav-toggle");
+      var navLinks = document.querySelector(".nav-links");
+      toggleButton.addEventListener("click", function(e) {
+        e.preventDefault();
+        navLinks.classList.toggle("active");
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lamma - Security & Privacy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #d35400;
+      --secondary: #8e44ad;
+      --accent: #f39c12;
+      --light: #f9f9f9;
+      --dark: #34495e;
+      --success: #27ae60;
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --border-radius: 12px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    /* Global Styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-main); line-height: 1.6; color: var(--dark); background-color: #fcfcfc; overflow-x: hidden; }
+    a { text-decoration: none; }
+    
+    /* Header (Same as home.html) */
+    header {
+      background-color: #fff;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+    }
+    .logo { display: flex; align-items: center; }
+    .logo img { height: 60px; width: auto; margin-right: 10px; }
+    .logo h1 { font-size: 1.8rem; color: var(--primary); font-weight: 700; }
+    .nav-links { display: flex; list-style: none; gap: 25px; }
+    .nav-links a {
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 1.1rem;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-links a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-links a:hover:after { width: 100%; }
+    .nav-links a.active { color: var(--primary); }
+    .mobile-nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dark); }
+    @media (max-width: 768px) {
+      .mobile-nav-toggle { display: block; }
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -300px;
+        background-color: #fff;
+        width: 300px;
+        height: 100vh;
+        flex-direction: column;
+        padding: 40px 20px;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        z-index: 99;
+      }
+      .nav-links.active { right: 0; }
+    }
+    
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 50vh;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4ecfb 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('/LammaSecurity.png') no-repeat center;
+      background-size: cover;
+      opacity: 0.15;
+    }
+    .hero h2 {
+      position: relative;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--dark);
+      z-index: 1;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      position: relative;
+      font-size: 1.3rem;
+      color: #555;
+      z-index: 1;
+    }
+    
+    /* Security Promise Section */
+    .security-content {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .security-content h3 {
+      font-size: 2.8rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    .security-content p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+    .security-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .security-card {
+      background: #fff;
+      padding: 25px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: left;
+    }
+    .security-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+    .security-card i {
+      font-size: 2.8rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+    .security-card h4 {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+    .security-card p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    
+    /* FAQ Section */
+    .security-faq {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: left;
+    }
+    .security-faq h3 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .faq-item {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+    }
+    .faq-item h4 {
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .faq-item p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    
+    /* Call-to-Action Section */
+    .security-cta {
+      text-align: center;
+      margin: 40px 0;
+    }
+    .security-cta a {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: var(--primary);
+      color: #fff;
+      border-radius: var(--border-radius);
+      font-size: 1.1rem;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .security-cta a:hover {
+      background-color: #c04300;
+      transform: translateY(-3px);
+    }
+    
+    /* Footer (Same as home.html) */
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 60px 20px 30px;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .footer-logo img {
+      height: 40px;
+      margin-right: 10px;
+      filter: brightness(0) invert(1);
+    }
+    .footer-logo h2 {
+      font-size: 1.8rem;
+      color: white;
+    }
+    .footer-about p {
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+    .footer-links h3,
+    .footer-contact h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .footer-links h3::after,
+    .footer-contact h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: var(--primary);
+    }
+    .footer-links ul {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+    }
+    .footer-links a i {
+      margin-right: 10px;
+      font-size: 0.8rem;
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    .contact-info {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+    }
+    .contact-info i {
+      margin-right: 15px;
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-top: 5px;
+    }
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .social-link:hover {
+      background-color: var(--primary);
+      transform: translateY(-3px);
+    }
+    .copyright {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 30px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="/LammaLogo.png" alt="Lamma Logo">
+        <h1>Lamma</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="how_it_works.html">How It Works</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="security.html" class="active">Security & Privacy</a></li>
+      </ul>
+      <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div>
+      <h2>Security & Privacy</h2>
+      <p>Your trust is our highest priority. We ensure your data is protected every step of the way.</p>
+    </div>
+  </section>
+  
+  <!-- Security Promise Section -->
+  <section class="security-content">
+    <h3>Our Security Promise</h3>
+    <p>At Lamma, we implement industry-leading security measures and a privacy-by-design approach to keep your personal information safe. We continuously update our practices and technologies to meet evolving security challenges.</p>
+    <div class="security-cards">
+      <div class="security-card">
+        <i class="fas fa-lock"></i>
+        <h4>Data Encryption</h4>
+        <p>Your data is encrypted both in transit and at rest using cutting-edge encryption standards.</p>
+      </div>
+      <div class="security-card">
+        <i class="fas fa-server"></i>
+        <h4>Secure Infrastructure</h4>
+        <p>Our servers are fortified with advanced security protocols and monitored around the clock.</p>
+      </div>
+      <div class="security-card">
+        <i class="fas fa-user-shield"></i>
+        <h4>Privacy by Design</h4>
+        <p>We build privacy into every aspect of our service, ensuring minimal data collection and maximum protection.</p>
+      </div>
+      <div class="security-card">
+        <i class="fas fa-sync-alt"></i>
+        <h4>Continuous Updates</h4>
+        <p>Our security measures are regularly reviewed and updated to stay ahead of potential threats.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FAQ Section -->
+  <section class="security-faq">
+    <h3>Frequently Asked Questions</h3>
+    <div class="faq-item">
+      <h4>How is my data protected?</h4>
+      <p>We use state-of-the-art encryption, secure servers, and strict access controls to safeguard your information.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Do you share my data with third parties?</h4>
+      <p>No. Your privacy is paramount. We never share your personal data without your explicit consent.</p>
+    </div>
+    <div class="faq-item">
+      <h4>What measures are in place to prevent breaches?</h4>
+      <p>Our systems are continuously monitored and updated, and we conduct regular security audits to ensure the highest protection standards.</p>
+    </div>
+  </section>
+  
+  <!-- Call-to-Action Section -->
+  <section class="security-cta">
+    <a href="contact.html">Have Security Questions? Contact Us</a>
+  </section>
+  
+  <!-- Footer (Same as home.html) -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="/LammaLogo.png" alt="Lamma Logo">
+          <h2>Lamma</h2>
+        </div>
+        <p>Bringing Palestinian families together through meaningful interactions and culturally relevant activities.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="features.html"><i class="fas fa-chevron-right"></i> Features</a></li>
+          <li><a href="how_it_works.html"><i class="fas fa-chevron-right"></i> How It Works</a></li>
+          <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a></li>
+          <li><a href="faq.html"><i class="fas fa-chevron-right"></i> FAQs</a></li>
+          <li><a href="security.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <div class="contact-info">
+          <i class="fas fa-phone"></i>
+          <p>+972 595114517</p>
+        </div>
+        <div class="contact-info">
+          <i class="fas fa-envelope"></i>
+          <p>seniorlamma@gmail.com</p>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://x.com/LammaFamilyApp" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/lamma_app/" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@LammaApp" class="social-link"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 Lamma. All rights reserved.</p>
+  </footer>
+</body>
+</html>

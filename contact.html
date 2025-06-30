@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lamma - Contact Us</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #d35400;
+      --secondary: #8e44ad;
+      --accent: #f39c12;
+      --light: #f9f9f9;
+      --dark: #34495e;
+      --success: #27ae60;
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --border-radius: 12px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: var(--font-main);
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: #fcfcfc;
+      overflow-x: hidden;
+    }
+    a {
+      text-decoration: none;
+    }
+
+    /* Header with Dropdown Navbar */
+    header {
+      background-color: #fff;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      position: relative; /* Needed for absolute nav-links */
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 60px;
+      width: auto;
+      margin-right: 10px;
+    }
+    .logo h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+    /* Dropdown nav: hidden by default (max-height:0), toggled via JS */
+    .nav-links {
+      display: block !important;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.5s ease;
+      box-shadow: var(--shadow);
+      z-index: 99;
+      padding: 0;
+      margin: 0;
+    }
+    .nav-links.active {
+      max-height: 300px; /* Enough for 6 links */
+    }
+    .nav-links li {
+      list-style: none;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .nav-links li a {
+      display: block;
+      padding: 15px 20px;
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 1.1rem;
+      position: relative;
+      transition: background-color 0.3s;
+    }
+    .nav-links li a:hover {
+      background-color: #f5f5f5;
+      color: var(--primary);
+    }
+    /* Stylish icons before each link */
+    .nav-links li a::before {
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      margin-right: 10px;
+    }
+    .nav-links li:nth-child(1) a::before {
+      content: "\f015"; /* Home icon */
+    }
+    .nav-links li:nth-child(2) a::before {
+      content: "\f05a"; /* Info icon */
+    }
+    .nav-links li:nth-child(3) a::before {
+      content: "\f085"; /* Cog icon */
+    }
+    .nav-links li:nth-child(4) a::before {
+      content: "\f144"; /* Play icon */
+    }
+    .nav-links li:nth-child(5) a::before {
+      content: "\f0e0"; /* Envelope icon */
+    }
+    .nav-links li:nth-child(6) a::before {
+      content: "\f023"; /* Lock icon */
+    }
+    /* Mark active link visually */
+    .nav-links li a.active {
+      color: var(--primary);
+    }
+
+    .mobile-nav-toggle {
+      display: block !important; /* Force the toggle to show on all sizes */
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--dark);
+    }
+
+    /* Hero Section for Contact */
+    .hero {
+      position: relative;
+      height: 50vh;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4ecfb 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('/LammaContact.png') no-repeat center;
+      background-size: cover;
+      opacity: 0.1;
+    }
+    .hero h2 {
+      position: relative;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--dark);
+      z-index: 1;
+    }
+    .hero p {
+      position: relative;
+      font-size: 1.2rem;
+      color: #555;
+      margin-top: 10px;
+      z-index: 1;
+    }
+
+    /* New Creative Contact Information Section */
+    .creative-contact {
+      background: linear-gradient(135deg, #f5f7fa, #e4ecfb);
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .creative-contact h3 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .creative-contact p {
+      font-size: 1.1rem;
+      color: var(--dark);
+      margin-bottom: 40px;
+    }
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .contact-card {
+      background: #fff;
+      padding: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .contact-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    .contact-card i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+    .contact-card h4 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+    .contact-card p {
+      font-size: 1rem;
+      color: #555;
+    }
+    /* Updated Social Links in Contact Information Section */
+    .creative-contact .social-link {
+      background-color: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .creative-contact .social-link:hover {
+      background-color: rgb(231, 185, 124);
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+    .creative-contact .social-links {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    /* Contact Form Section */
+    .contact-form {
+      max-width: 1200px;
+      margin: 40px auto 80px auto;
+      padding: 0 20px;
+    }
+    .contact-form-inner {
+      background: #fff;
+      padding: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .contact-form-inner h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+      text-align: center;
+    }
+    .contact-form-inner form input,
+    .contact-form-inner form textarea {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      margin-bottom: 20px;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+    }
+    .contact-form-inner form input:focus,
+    .contact-form-inner form textarea:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+    .contact-form-inner form button {
+      padding: 15px 30px;
+      border: none;
+      border-radius: var(--border-radius);
+      background-color: var(--primary);
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      display: block;
+      margin: 0 auto;
+    }
+    .contact-form-inner form button:hover {
+      background-color: #dd9051;
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 60px 20px 30px;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+    .footer-about {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+    }
+    .footer-logo img {
+      height: 40px;
+      margin-right: 10px;
+      filter: brightness(0) invert(1);
+    }
+    .footer-logo h2 {
+      font-size: 1.8rem;
+      color: white;
+    }
+    .footer-about p {
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+    .footer-links h3,
+    .footer-contact h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .footer-links h3::after,
+    .footer-contact h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: var(--primary);
+    }
+    .footer-links ul {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+    }
+    .footer-links a i {
+      margin-right: 10px;
+      font-size: 0.8rem;
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    .footer-contact .contact-info {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+    .footer-contact .contact-info i {
+      margin-right: 15px;
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-top: 5px;
+    }
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.1);
+      color: white;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .social-link:hover {
+      background-color: var(--primary);
+      transform: translateY(-3px);
+    }
+    .copyright {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 30px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero {
+        height: auto;
+        padding: 40px 0;
+      }
+      .hero h2 {
+        font-size: 2rem;
+      }
+      .nav-links li a {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with Dropdown Nav -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="/LammaLogo.png" alt="Lamma Logo">
+        <h1>Lamma</h1>
+      </div>
+      <!-- Dropdown menu links -->
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="how_it_works.html">How It Works</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="security.html">Security & Privacy</a></li>
+      </ul>
+      <!-- Mobile nav toggle button -->
+      <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div>
+      <h2>Get In Touch</h2>
+      <p>We’d love to hear your feedback, answer your questions, and help you connect with Lamma.</p>
+    </div>
+  </section>
+
+  <!-- New Creative Contact Information Section -->
+  <section class="creative-contact">
+    <h3>Contact Information</h3>
+    <p>Reach out to us through any of the channels below. We're here to help!</p>
+    <div class="contact-cards">
+      <div class="contact-card">
+        <i class="fas fa-phone"></i>
+        <h4>Call Us</h4>
+        <p>+972 595114517</p>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-envelope"></i>
+        <h4>Email Us</h4>
+        <p><a href="mailto:seniorlamma@gmail.com">seniorlamma@gmail.com</a></p>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-map-marker-alt"></i>
+        <h4>Visit Us</h4>
+        <p>Jenin, Palestine - WestBank</p>
+      </div>
+    </div>
+    <div class="social-links linksBhover">
+      <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://x.com/LammaFamilyApp" class="social-link"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.instagram.com/lamma_app/" class="social-link"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@LammaApp" class="social-link"><i class="fab fa-youtube"></i></a>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="contact-form">
+    <div class="contact-form-inner">
+      <h3>Send Us a Message</h3>
+      <form action="contact.php" method="post">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email Address" required>
+        <input type="text" name="subject" placeholder="Subject" required>
+        <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+        <button type="submit">Submit Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer (Same as home.html) -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="/LammaLogo.png" alt="Lamma Logo">
+          <h2>Lamma</h2>
+        </div>
+        <p>Bringing Palestinian families together through meaningful interactions and culturally relevant activities.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="features.html"><i class="fas fa-chevron-right"></i> Features</a></li>
+          <li><a href="how_it_works.html"><i class="fas fa-chevron-right"></i> How It Works</a></li>
+          <li><a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a></li>
+          <li><a href="faq.html"><i class="fas fa-chevron-right"></i> FAQs</a></li>
+          <li><a href="security.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <div class="contact-info">
+          <i class="fas fa-phone"></i>
+          <p>+972 595114517</p>
+        </div>
+        <div class="contact-info">
+          <i class="fas fa-envelope"></i>
+          <p>seniorlamma@gmail.com</p>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://x.com/LammaFamilyApp" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/lamma_app/" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@LammaApp" class="social-link"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 Lamma. All rights reserved.</p>
+  </footer>
+
+  <!-- Simple Script for Toggling the Dropdown Nav -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var toggleButton = document.querySelector(".mobile-nav-toggle");
+      var navLinks = document.querySelector(".nav-links");
+      
+      toggleButton.addEventListener("click", function(e) {
+        e.preventDefault();
+        navLinks.classList.toggle("active");
+      });
+    });
+  </script>
+</body>
+</html>
